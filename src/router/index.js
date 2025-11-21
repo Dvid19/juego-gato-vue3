@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Lobby from "../views/Lobby.vue";
 import GameGato from "../views/GameGato.vue";
+import MsgPrueba from "../views/MsgPrueba.vue";
 
 const routes = [
     {
         path: "/",
         redirect: "/lobby"
+    },
+    {
+        path: "/reverb",
+        name: "Reverb",
+        component: MsgPrueba,
     },
     {
         path: "/lobby",

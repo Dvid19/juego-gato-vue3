@@ -1,19 +1,21 @@
 <template>
 
-    <div class="flex items-center justify-center">
-        <h1 class="text-4xl font-medium text-black">
-            Estas preparado...
-        </h1>
-    </div>
+    <div class="flex flex-col items-center justify-center min-h-[100vh] my-12">
 
-    <div class="space-y-6">
-        <button class="text-white font-medium bg-green-600 p-6 w-full h-[12rem]">
-            Crear partida
-        </button>
+        <div class="flex flex-col gap-5">
+            <button class="text-white font-bold text-lg bg-orange-600 p-6 min-w-[24rem] h-[12rem] rounded-lg">
+                Jugar VS la CPU
+            </button>
 
-        <button class="text-white font-medium bg-blue-600 p-6 w-full h-[12rem]">
-            Unirse a una partida
-        </button>
+            <button class="text-white font-bold text-lg bg-green-600 p-6 min-w-[24rem] h-[12rem] rounded-lg">
+                Crear partida online
+            </button>
+
+            <button class="text-white font-bold text-lg bg-blue-600 p-6 min-w-[24rem] h-[12rem] rounded-lg">
+                Unirse a una partida online
+            </button>
+        </div>
+
     </div>
 
 </template>
