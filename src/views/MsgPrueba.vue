@@ -26,7 +26,8 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue"
-import echo from "../resource/echo.js"
+import echo from "../resources/echo.js"
+import { prueba } from "../services/chatService.js"
 
 const myId = ref(1)
 
@@ -50,7 +51,12 @@ const msgsFormat = computed(() => {
 })
 
 onMounted(() => {
-    echo.channel('chat')
+    echo.channel('chat').listen('Mensaje', (e) => {
+        console.log("DATA DEL WEBSOCKET RECIBIDA: ", e)
+    })
+
+    pruebaGet()
+    
 })
 
 function getHoraFormato(f){
@@ -67,6 +73,15 @@ function getHoraFormato(f){
     minutos = minutos < 10 ? `0${minutos}` : minutos
     
     return `${horas}:${minutos} ${ampm}`
+}
+
+async function pruebaGet(){
+    try{
+        const response = await prueba()
+        console.log(response.data)
+    } catch (e) {
+        console.log(e.message)
+    }
 }
 
 </script>

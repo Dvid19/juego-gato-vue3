@@ -3,6 +3,10 @@ import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
 
+console.log("App key: ", import.meta.env.VITE_REVERB_APP_KEY)
+console.log("Host: ", import.meta.env.VITE_REVERB_HOST)
+console.log("Port: ", import.meta.env.VITE_REVERB_PORT)
+
 const echo = new Echo({
     broadcaster: 'reverb',
     key: import.meta.env.VITE_REVERB_APP_KEY,
