@@ -26,8 +26,8 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue"
-import echo from "../resources/echo.js"
-import { prueba } from "../services/chatService.js"
+import echo from "../../resources/echo.js"
+import { prueba } from "../../services/chatService.js"
 
 const myId = ref(1)
 

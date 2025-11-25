@@ -3,7 +3,8 @@ import { useAuthStore } from "../stores/auth.store";
 
 import Lobby from "../views/Lobby.vue";
 import GameGato from "../views/GameGato.vue";
-import MsgPrueba from "../views/MsgPrueba.vue";
+import Msgs from "../views/Messages/Msgs.vue";
+import MsgsChat from "../views/Messages/MsgsChat.vue";
 import Login from "../views/Auth/Login.vue";
 
 const routes = [
@@ -16,10 +17,15 @@ const routes = [
         redirect: "/lobby"
     },
     {
-        path: "/reverb",
-        name: "Reverb",
-        component: MsgPrueba,
+        path: "/msgs/:id", // user_id
+        name: "Msgs",
+        component: Msgs 
     },
+    {
+        path: "/msgs-chat/:id", // to_user_id 
+        name: "MsgsChat",
+        component: MsgsChat 
+    },   
     {
         path: "/lobby",
         name: "Lobby",
