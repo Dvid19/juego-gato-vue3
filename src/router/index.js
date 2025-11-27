@@ -17,7 +17,7 @@ const routes = [
         redirect: "/lobby"
     },
     {
-        path: "/msgs/:id", // user_id
+        path: "/msgs", // user_id
         name: "Msgs",
         component: Msgs 
     },
