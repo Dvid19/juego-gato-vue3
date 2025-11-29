@@ -9,7 +9,7 @@
         class="inline-block px-3 py-2 rounded-lg"
         :class="m.user_id === user.id ? 'bg-blue-500 text-white' : 'bg-gray-200'"
       >
-        {{ m.contenido }}
+        {{ m.content }}
       </div>
     </div>
   </div>

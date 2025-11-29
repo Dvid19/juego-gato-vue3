@@ -3,9 +3,8 @@ import { useAuthStore } from "../stores/auth.store";
 
 import Lobby from "../views/Lobby.vue";
 import GameGato from "../views/GameGato.vue";
-import Msgs from "../views/Messages/Msgs.vue";
-import MsgsChat from "../views/Messages/MsgsChat.vue";
 import Login from "../views/Auth/Login.vue";
+import ChatPage from "../views/Chat/ChatPage.vue";
 
 const routes = [
     {
@@ -17,15 +16,10 @@ const routes = [
         redirect: "/lobby"
     },
     {
-        path: "/msgs", // user_id
-        name: "Msgs",
-        component: Msgs 
-    },
-    {
-        path: "/msgs-chat/:id", // to_user_id 
-        name: "MsgsChat",
-        component: MsgsChat 
-    },   
+        path: "/chat",
+        name: "Chat",
+        component: ChatPage,
+    },  
     {
         path: "/lobby",
         name: "Lobby",

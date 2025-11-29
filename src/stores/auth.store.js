@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import api from "../services/api.service";
 import { defineStore } from "pinia";
 
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore("auth", () => {
 
     const getUser = async () => {
         const { data } = await api.get('/user');
-        user.value = data.user;
+        user.value = data;
     }
 
     return {
@@ -33,4 +33,6 @@ export const useAuthStore = defineStore("auth", () => {
         logout,
         getUser
     }
+}, {
+    persist: true
 })

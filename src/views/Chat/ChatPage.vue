@@ -21,10 +21,14 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import ConversationsList from "./ConversationsList.vue";
 import ChatMessages from "./ChatMessages.vue";
 import MessageInput from "./MessageInput.vue";
+
+import { useAuthStore } from "../../stores/auth.store";
+import { getConversation, getConversations, postMessage } from "../../services/conversation.service";
+
+const auth = useAuthStore();
 
 const conversations = ref([]);
 const messages = ref([]);
@@ -33,23 +37,24 @@ const user = ref(null);
 
 // Cargar usuario autenticado
 onMounted(async () => {
-  user.value = (await axios.get("/api/user")).data;
+  user.value = auth.user;
   loadConversations();
 });
 
 // Cargar conversaciones
 async function loadConversations() {
-  conversations.value = (await axios.get("/api/conversations")).data;
+  const { data } = await getConversations();
+  conversations.value = data;
 }
 
 // Cargar mensajes de una conversación
 async function loadConversation(conversation) {
   activeConversationId.value = conversation.id;
 
-  let response = await axios.get(`/api/conversations/${conversation.id}/messages`);
+  const response = await getConversation(conversation.id);
   messages.value = response.data.data; // paginación
 
-  listenToChannel(conversation.id);
+  // listenToChannel(conversation.id);
 }
 
 // Escuchar WebSocket
@@ -63,10 +68,12 @@ function listenToChannel(conversationId) {
 async function sendMessage(text) {
   if (!activeConversationId.value) return;
 
-  let response = await axios.post(`/api/conversations/${activeConversationId.value}/messages`, {
-    contenido: text
+  const response = await postMessage(activeConversationId.value, {
+    content: text
   });
 
-  messages.value.push(response.data);
+  console.log(response);
+
+  // messages.value.push(response.data);
 }
 </script>

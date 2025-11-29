@@ -27,7 +27,8 @@ const error = ref("")
 async function submit(){
     try{
         await auth.login(email.value, password.value);
-        router.push("/reverb");
+        await auth.getUser();
+        router.push("/chat");
     } catch (e) {
         error.value = e.message;
     }
