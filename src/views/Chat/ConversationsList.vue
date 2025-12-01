@@ -11,7 +11,7 @@
           Conversación #{{ c.id }}
         </div>
         <div class="text-gray-600 text-sm truncate">
-          {{ c.messages?.[0]?.contenido || "Sin mensajes" }}
+          {{ c.messages?.[0]?.content || "Sin mensajes" }}
         </div>
       </li>
     </ul>

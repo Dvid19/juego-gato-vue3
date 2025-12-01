@@ -15,6 +15,15 @@ const echo = new Echo({
     wssPort: import.meta.env.VITE_REVERB_PORT || 8080,
     forceTLS: false,
     enabledTransports: ['ws', 'wss'],
+    authEndpoint: "http://localhost/juego-gato/public/broadcasting/auth",
+
+    // auth: {
+    //     headers: {
+    //         'X-Requested-With': 'XMLHttpRequest',
+    //     }
+    // },
+
+    withCredentials: true,
 });
 
 export default echo;

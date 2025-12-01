@@ -25,6 +25,7 @@ import ConversationsList from "./ConversationsList.vue";
 import ChatMessages from "./ChatMessages.vue";
 import MessageInput from "./MessageInput.vue";
 
+import echo from "../../resources/echo";
 import { useAuthStore } from "../../stores/auth.store";
 import { getConversation, getConversations, postMessage } from "../../services/conversation.service";
 
@@ -54,14 +55,36 @@ async function loadConversation(conversation) {
   const response = await getConversation(conversation.id);
   messages.value = response.data.data; // paginación
 
-  // listenToChannel(conversation.id);
+  listenToChannel(conversation.id);
 }
 
 // Escuchar WebSocket
 function listenToChannel(conversationId) {
-  window.Echo.channel(`chat.${conversationId}`).listen("MessageSent", (e) => {
-    messages.value.push(e.message);
+  console.log('Ya inicio la busqueda de reverb.')
+  echo.join(`chat.${conversationId}`).listen("Mensaje", (e) => {
+    messages.value.push(e);
+    console.log("data de reverb: ", e);
   });
+
+  // const canal = echo.join(`chat.${conversationId}`)
+
+  //   .here((members) => {
+  //     console.log("Miembros: ", members)
+  //   })
+
+  //   .joining((user) => {
+  //     console.log('Nuevo usuario: ', user)
+  //   })
+
+  //   .leaving((user) => {
+  //     console.log('Usuario que abandono: ', user)
+  //   })
+
+  //   .listen('Mensaje', (e) => {
+  //     messages.value.push(e)
+  //     console.log("data de reverb: ", e);
+  //   })
+
 }
 
 // Enviar mensaje API
@@ -69,11 +92,9 @@ async function sendMessage(text) {
   if (!activeConversationId.value) return;
 
   const response = await postMessage(activeConversationId.value, {
-    content: text
+    content: text, type: "texto"
   });
 
-  console.log(response);
-
-  // messages.value.push(response.data);
+  messages.value.push(response.data);
 }
 </script>
