@@ -8,21 +8,24 @@ export const useAuthStore = defineStore("auth", () => {
     const token = ref(localStorage.getItem("token") || null);
 
     const login = async (email, password) => {
-        const { data } = await api.post('/login', { email, password });
+        // Necesario para generar cookies
+        await api.get('/sanctum/csrf-cookie', {withCredentials:true});
+
+        const { data } = await api.post('api/login', { email, password }, {withCredentials: true} );
         user.value = data.user;
         token.value = data.token;
         localStorage.setItem('token', data.token)
     }
 
     const logout = async () => {
-        await api.post('/logout');
+        await api.post('api/logout');
         user.value = null;
         token.value = null;
         localStorage.removeItem('token');
     }
 
     const getUser = async () => {
-        const { data } = await api.get('/user');
+        const { data } = await api.get('api/user');
         user.value = data;
     }
 

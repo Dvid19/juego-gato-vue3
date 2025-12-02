@@ -61,30 +61,10 @@ async function loadConversation(conversation) {
 // Escuchar WebSocket
 function listenToChannel(conversationId) {
   console.log('Ya inicio la busqueda de reverb.')
-  echo.join(`chat.${conversationId}`).listen("Mensaje", (e) => {
+  echo.private(`chat.${conversationId}`).listen("Mensaje", (e) => {
     messages.value.push(e);
     console.log("data de reverb: ", e);
   });
-
-  // const canal = echo.join(`chat.${conversationId}`)
-
-  //   .here((members) => {
-  //     console.log("Miembros: ", members)
-  //   })
-
-  //   .joining((user) => {
-  //     console.log('Nuevo usuario: ', user)
-  //   })
-
-  //   .leaving((user) => {
-  //     console.log('Usuario que abandono: ', user)
-  //   })
-
-  //   .listen('Mensaje', (e) => {
-  //     messages.value.push(e)
-  //     console.log("data de reverb: ", e);
-  //   })
-
 }
 
 // Enviar mensaje API
