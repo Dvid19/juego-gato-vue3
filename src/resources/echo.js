@@ -14,10 +14,14 @@ const echo = new Echo({
     wsHost: import.meta.env.VITE_REVERB_HOST || window.location.hostname,
     wsPort: import.meta.env.VITE_REVERB_PORT || 8080,
     wssPort: import.meta.env.VITE_REVERB_PORT || 8080,
-    forceTLS: false,
     enabledTransports: ['ws', 'wss'],
-    authEndpoint: "http://localhost/juego-gato-laravel/public/broadcasting/auth", // Endpoint de autenticación
-    withCredentials: true
+    authEndpoint: "http://localhost/juego-gato/public/api/broadcasting/auth", // Endpoint de autenticación
+    auth: {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    },
+    forceTLS: false
 });
 
 export default echo;

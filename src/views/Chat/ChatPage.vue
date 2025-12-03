@@ -62,8 +62,8 @@ async function loadConversation(conversation) {
 function listenToChannel(conversationId) {
   console.log('Ya inicio la busqueda de reverb.')
   echo.private(`chat.${conversationId}`).listen("Mensaje", (e) => {
-    messages.value.push(e);
-    console.log("data de reverb: ", e);
+    messages.value.push(e.mensaje);
+    console.log("data de reverb: ", e.mensaje);
   });
 }
 
@@ -75,6 +75,6 @@ async function sendMessage(text) {
     content: text, type: "texto"
   });
 
-  messages.value.push(response.data);
+  // messages.value.push(response.data);
 }
 </script>
