@@ -1,0 +1,68 @@
+<template>
+
+    <div class="flex items-center justify-center h-[100vh] max-w-2xl mx-auto">
+        
+        <div class="flex flex-col items-center justify-center w-full">
+            
+            <div v-if="!partidaEmparejada" class="mb-2 grid w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible">
+                <svg class="text-gray-300 animate-spin" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24">
+                    <path
+                    d="M32 3C35.8083 3 39.5794 3.75011 43.0978 5.20749C46.6163 6.66488 49.8132 8.80101 52.5061 11.4939C55.199 14.1868 57.3351 17.3837 58.7925 20.9022C60.2499 24.4206 61 28.1917 61 32C61 35.8083 60.2499 39.5794 58.7925 43.0978C57.3351 46.6163 55.199 49.8132 52.5061 52.5061C49.8132 55.199 46.6163 57.3351 43.0978 58.7925C39.5794 60.2499 35.8083 61 32 61C28.1917 61 24.4206 60.2499 20.9022 58.7925C17.3837 57.3351 14.1868 55.199 11.4939 52.5061C8.801 49.8132 6.66487 46.6163 5.20749 43.0978C3.7501 39.5794 3 35.8083 3 32C3 28.1917 3.75011 24.4206 5.2075 20.9022C6.66489 17.3837 8.80101 14.1868 11.4939 11.4939C14.1868 8.80099 17.3838 6.66487 20.9022 5.20749C24.4206 3.7501 28.1917 3 32 3L32 3Z"
+                    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                    d="M32 3C36.5778 3 41.0906 4.08374 45.1692 6.16256C49.2477 8.24138 52.7762 11.2562 55.466 14.9605C58.1558 18.6647 59.9304 22.9531 60.6448 27.4748C61.3591 31.9965 60.9928 36.6232 59.5759 40.9762"
+                    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-900">
+                    </path>
+                </svg>
+            </div>
+
+            <div v-if="partidaEmparejada">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-[2rem] fill-green-600 mb-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+                </svg>
+            </div>
+
+
+
+            <p :class="['text-2xl font-bold text-center mb-3', 
+                !partidaEmparejada ? 'text-black' : 'text-green-600'
+            ]">
+                {{ !partidaEmparejada ? 'Esperando a emparejar la partida' : 'Partida emparejada' }}
+            </p>
+
+            <p v-if="!partidaEmparejada" class="text-base font-base text-center mb-8">Copia el enlace y compartelo para otro jugador se pueda unir a la partida o comparte el codigo de la partida.</p>
+            
+            <div v-if="!partidaEmparejada" class="flex items-center gap-5 p-3 border rounded">
+                <p class="text-lg text-blue-700">
+                    {{ link }}
+                </p>
+                <button @click="copyLink" class="bg-black py-2 px-3 text-white rounded-md">Copiar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const code = route.params.code;
+const link = window.location.href; 
+const partidaEmparejada = ref(false)
+
+async function copyLink(){
+    try {
+        await navigator.clipboard.writeText(link)
+        alert('El link copiado.');
+    } catch (e) {
+        alert(e.message)
+    }
+}
+
+
+</script>

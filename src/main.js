@@ -4,10 +4,6 @@ import App from './App.vue'
 import router from './router';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
-import axios from 'axios';
-
-// 👇 ESTA LÍNEA DEBE IR AQUÍ
-axios.defaults.withCredentials = true;
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedState);

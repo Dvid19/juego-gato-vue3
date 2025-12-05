@@ -15,8 +15,7 @@ const echo = new Echo({
     wsPort: import.meta.env.VITE_REVERB_PORT || 8080,
     wssPort: import.meta.env.VITE_REVERB_PORT || 8080,
     enabledTransports: ['ws', 'wss'],
-    // authEndpoint: "http://localhost/juego-gato/public/api/broadcasting/auth", // Endpoint de autenticación
-    authEndpoint: "http://localhost/juego-gato-laravel/public/api/broadcasting/auth", // Endpoint de autenticación
+    authEndpoint: import.meta.env.VITE_REVERB_AUTH_ENDPOINT, // Endpoint de autenticación
     auth: {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

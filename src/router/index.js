@@ -6,6 +6,10 @@ import GameGato from "../views/GameGato.vue";
 import Login from "../views/Auth/Login.vue";
 import ChatPage from "../views/Chat/ChatPage.vue";
 
+import GatoMenuMultijugadorView from "../views/GameGato/GatoMenuMultijugadorView.vue";
+import GatoSalaEsperaView from "../views/GameGato/GatoSalaEsperaView.vue";
+import GatoUnirsePartidaView from "../views/GameGato/GatoUnirsePartidaView.vue";
+
 const routes = [
     {
         path: "/login",
@@ -29,6 +33,27 @@ const routes = [
         path: "/game-gato",
         name: "GameGato",
         component: GameGato
+    }, 
+
+    // Gato - Multijugador
+
+    // Menu multijugador
+    {
+        path: "/gato-menu-multijugador",
+        name: "GatoMenuMultijugador",
+        component: GatoMenuMultijugadorView
+    },
+    // Sala de espera
+    {
+        path: "/gato-sala-espera/:code",
+        name: "GatoSalaEspera",
+        component: GatoSalaEsperaView
+    },
+    // Unirse a una partida
+    {
+        path: "/gato-unirse-partida",
+        name: "GatoUnirsePartida",
+        component: GatoUnirsePartidaView
     }
 ];
 
