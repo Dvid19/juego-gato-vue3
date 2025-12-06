@@ -13,7 +13,8 @@
             </button>
 
             <!-- Unisrse a una partida -->
-            <button class="bg-tranaparent border-2 border-blue-600 text-blue-600 text-lg font-medium py-3 px-6 rounded transition duration-300 ease-in-out hover:bg-black hover:border-black hover:text-white"> 
+            <button class="bg-tranaparent border-2 border-blue-600 text-blue-600 text-lg font-medium py-3 px-6 rounded transition duration-300 ease-in-out hover:bg-black hover:border-black hover:text-white"
+                @click="joinGameTo"> 
                 Unirse a una partida    
             </button>
 
@@ -40,6 +41,10 @@ const createGame = async () => {
     } finally {
         loading.value = false
     }
+} 
+
+function joinGameTo(){
+    router.push('/gato-unirse-partida');
 } 
 
 </script>

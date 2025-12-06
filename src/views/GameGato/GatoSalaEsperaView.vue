@@ -47,13 +47,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '../../stores/auth.store';
+import router from '../../router';
+import echo from '../../resources/echo';
+
+const auth = useAuthStore();
 
 const route = useRoute();
 const code = route.params.code;
 const link = window.location.href; 
 const partidaEmparejada = ref(false)
+
+onMounted(() => {
+    listenToChannel(code);
+})
 
 async function copyLink(){
     try {
@@ -62,6 +71,20 @@ async function copyLink(){
     } catch (e) {
         alert(e.message)
     }
+}
+
+// Escuchar WebSocket
+function listenToChannel(gameCode){
+  echo.join(`game.${gameCode}`).listen("GameJoined", (e) => {
+
+    const player_x = e.game.player_x;
+    const player_o = e.game.player_o;
+
+    if (player_x && player_o && [player_x, player_o].includes(auth.user.id)) {
+        router.push({name: "GatoPlayGame", params: {code}})
+    }
+
+  });
 }
 
 

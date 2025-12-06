@@ -9,6 +9,7 @@ import ChatPage from "../views/Chat/ChatPage.vue";
 import GatoMenuMultijugadorView from "../views/GameGato/GatoMenuMultijugadorView.vue";
 import GatoSalaEsperaView from "../views/GameGato/GatoSalaEsperaView.vue";
 import GatoUnirsePartidaView from "../views/GameGato/GatoUnirsePartidaView.vue";
+import GatoPlayGameView from "../views/GameGato/GatoPlayGameView.vue";
 
 const routes = [
     {
@@ -17,7 +18,8 @@ const routes = [
     },
     {
         path: "/",
-        redirect: "/lobby"
+        redirect: "/login",
+        meta: { public: true }
     },
     {
         path: "/chat",
@@ -27,7 +29,8 @@ const routes = [
     {
         path: "/lobby",
         name: "Lobby",
-        component: Lobby
+        component: Lobby,
+        meta: { requiresAuth: true }
     },
     {
         path: "/game-gato",
@@ -41,19 +44,29 @@ const routes = [
     {
         path: "/gato-menu-multijugador",
         name: "GatoMenuMultijugador",
-        component: GatoMenuMultijugadorView
+        component: GatoMenuMultijugadorView,
+        meta: { requiresAuth: true }
     },
     // Sala de espera
     {
         path: "/gato-sala-espera/:code",
         name: "GatoSalaEspera",
-        component: GatoSalaEsperaView
+        component: GatoSalaEsperaView,
+        meta: { requiresAuth: true }
     },
     // Unirse a una partida
     {
         path: "/gato-unirse-partida",
         name: "GatoUnirsePartida",
-        component: GatoUnirsePartidaView
+        component: GatoUnirsePartidaView,
+        meta: { requiresAuth: true }
+    },
+    // Juego principal 
+    {
+        path: "/gato-play-game/:code?",
+        name: "GatoPlayGame",
+        component: GatoPlayGameView,
+        meta: { requiresAuth: true }
     }
 ];
 
@@ -62,11 +75,14 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
     const auth = useAuthStore();
     if (to.meta.requiresAuth && !auth.token) {
-        return '/login'
+        next('/login');
+    } else {
+        next();
     }
+    
 });
 
 export default router;
