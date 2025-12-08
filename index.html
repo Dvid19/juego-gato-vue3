@@ -5,12 +5,34 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=aguafina-script:400" rel="stylesheet" />
+
+    <!-- Extender Tailwind para usar la fuente -->
+    <!-- IMPORTANTE: TAILWIND CONFIG ANTES DEL CDN -->
+    <script>
+      window.tailwind = {
+        theme: {
+          extend: {
+            fontFamily: {
+              aguafina: ['"Aguafina Script"', 'cursive'],
+            }
+          }
+        }
+      };
+    </script>   
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    
+
     <title>juego-gato</title>
   </head>
   <body>
     <div id="app"></div>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -28,7 +28,7 @@ async function submit(){
     try{
         await auth.login(email.value, password.value);
         await auth.getUser();
-        router.push("/chat");
+        router.push("/gato-menu-multijugador");
     } catch (e) {
         error.value = e.message;
     }

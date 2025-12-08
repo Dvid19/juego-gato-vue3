@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../stores/auth.store";
 
+import PublicLayoutComponent from "../components/layouts/PublicLayoutComponent.vue";
+
+import HomeView from "../views/Public/HomeView.vue"
+
 import Lobby from "../views/Lobby.vue";
 import GameGato from "../views/GameGato.vue";
 import Login from "../views/Auth/Login.vue";
@@ -15,12 +19,28 @@ const routes = [
     {
         path: "/login",
         component: Login,
+        meta: { public: true },
     },
     {
         path: "/",
-        redirect: "/login",
-        meta: { public: true }
+        redirect: "/home",
     },
+
+    // Public
+
+    // Home
+    {
+        path: "/",
+        component: PublicLayoutComponent,
+        children: [
+            {
+                path: "home",
+                name: "Home",
+                component: HomeView
+            }
+        ]
+    },
+
     {
         path: "/chat",
         name: "Chat",
